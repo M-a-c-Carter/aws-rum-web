@@ -227,12 +227,15 @@ export class VirtualPageLoadTimer extends MonkeyPatched<
     };
 
     private resetInterval = () => {
-        this.latestEndTime = Date.now();
-        clearInterval(this.periodicCheckerId);
-        this.periodicCheckerId = setInterval(
-            this.checkLoadStatus,
-            this.config.routeChangeComplete
-        ) as unknown as number;
+        console.log(this.periodicCheckerId);
+        setTimeout(() => {
+            this.latestEndTime = Date.now();
+            clearInterval(this.periodicCheckerId);
+            this.periodicCheckerId = setInterval(
+                this.checkLoadStatus,
+                this.config.routeChangeComplete
+            ) as unknown as number;
+        });
     };
 
     private moveItemsFromBuffer = (item: XMLHttpRequest) => {
